@@ -1,0 +1,40 @@
+html {
+    font-size: 15px;
+}
+#dialogBtn {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+#dialogBtn button {
+    margin-left: 8px;
+}
+#nav-pills {
+    position: absolute;
+    top: 30px;
+    width: 30%;
+}
+.nav-pills .nav-link.active {
+    background-color: #343a40;
+}
+.nav-pills .nav-link:hover {
+    background-color: #bac7d3;
+}
+.nav-pills .nav-link.active:hover {
+    background-color: #343a40;
+}
+#nav-pills a {
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+a.nav-link {
+    color: rgb(0, 0, 0);
+}
+#tab-panes {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    width: 65%;
+}
+.input-group {
+    width: 45%;
+}

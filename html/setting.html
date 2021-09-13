@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>设置</title>
+		<link rel="stylesheet" href="./css/bootstrap-4.4.1.min.css" />
+		<script>
+			window.$ = window.jQuery = require("./js/jquery-3.4.1.min");
+		</script>
+		<script src="./js/popper.min.js"></script>
+		<script src="./js/bootstrap-4.4.1.min.js"></script>
+		<link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="./js/vue-2.6.11.min.js"></script>
+		<link rel="stylesheet" href="./css/setting.css" />
+	</head>
+	<body class="bg-light">
+		<div id="app">
+			<!-- 对话框按钮 -->
+			<div id="dialogBtn">
+				<button  @click="save()" type="button" class="btn btn-outline-dark" :disabled="isDataNotChange">保存</button>
+				<button  @click="confirm()" type="button" class="btn btn-outline-dark">确认</button>
+				<button  @click="cancel()" type="button" class="btn btn-outline-dark">取消</button>
+			</div>
+
+			<!-- 左侧栏 -->
+			<div id="nav-pills">
+				<ul class="nav flex-column nav-pills" role="tablist">
+					<li v-for="(navPill, index) in panels" class="nav-item">
+						<!-- nav-link 要加单引号！！！ -->
+						<a :href="navPill.href" :class="{ 'nav-link':'true', active: isActive(index) }" data-toggle="pill" v-text="navPill.title"></a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 右侧栏 -->
+			<div id="tab-panes">
+				<div class="tab-content">
+					<!-- 使用须知 -->
+					<div :id="panels[0].id" class="container tab-pane active">
+						<h2 v-text="panels[0].title"></h2>
+						<br />
+						<h4 class="mb-3">如何使用</h4>
+						<a type="button" class="btn btn-dark text-light mb-3" href="https://www.vksir.zone/posts/autocc/" target="_blank">说明文档</a>
+						<p>如何设置并使用 AutoCC。这会跳转到程序说明文档，进行此步骤前请保持网络畅通。</p>
+
+						<br />
+						<h4 class="mb-3">初始化参数</h4>
+						<button type="button" class="btn btn-dark text-light mb-3" @click="initializeData()">开始初始化</button>
+						<p>请勿修改 data.json 文件，否则 AutoCC 可能会无法正常运行。如若无法正常运行，可尝试初始化参数。</p>
+
+						<br>
+						<h4 class="mb-3">关于</h4>
+						<p>版本号：10.0 SE</p>
+						<p>更新日期：2020-5-3</p>
+					</div>
+
+					<!-- 一键 CC -->
+					<div :id="panels[1].id" class="container tab-pane fade">
+						<h2 v-text="panels[1].title"></h2>
+						<br />
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="checkbox" v-model="data.isCCRun" />
+								</div>
+							</div>
+							<p type="text" class="form-control">启用</p>
+						</div>
+
+						<!-- 参数 -->
+						<h4 class="mb-3">参数</h4>
+						<div id="accordion">
+							<!-- Damage Mode -->
+							<div class="card mb-1">
+								<a class="card-header card-link text-dark" data-toggle="collapse" href="#collapseOne">Damage Mode</a>
+								<div id="collapseOne" class="collapse show" data-parent="#accordion">
+									<div class="card-body">
+										<div class="dropdown mb-3">
+											<button id="dropdownBtn" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" v-text="damageBtnTitle[data.level]">
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item" @click="levelChange(1)">一档</a>
+												<a class="dropdown-item" @click="levelChange(2)">二档</a>
+												<a class="dropdown-item" @click="levelChange(3)">三档</a>
+												<a class="dropdown-item" @click="levelChange(4)">四档</a>
+												<a class="dropdown-item" @click="levelChange(5)">五档</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" @click="levelChange(0)">自定义</a>
+											</div>
+										</div>
+										<div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														A
+													</div>
+												</div>
+												<input type="number" class="form-control" v-model="data.damage[0]" :disabled="isDamageInputBoxDisabled" />
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														B
+													</div>
+												</div>
+												<input type="number" class="form-control" v-model="data.damage[1]" :disabled="isDamageInputBoxDisabled" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Track Mode -->
+							<div class="card mb-1">
+								<a class="card-header collapsed card-link text-dark" data-toggle="collapse" href="#collapseTwo">Track Mode</a>
+								<div id="collapseTwo" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+										<div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														A
+													</div>
+												</div>
+												<input type="number" class="form-control" v-model="data.track[0]" />
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														B
+													</div>
+												</div>
+												<input type="number" class="form-control" v-model="data.track[1]" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Safe Mode -->
+							<div class="card mb-1">
+								<a class="card-header collapsed card-link text-dark" data-toggle="collapse" href="#collapseThree">Safe Mode</a>
+								<div id="collapseThree" class="collapse" data-parent="#accordion">
+									<div class="card-body">
+										<div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														A
+													</div>
+												</div>
+												<input type="number" class="form-control" v-model="data.safe[0]" />
+											</div>
+											<div class="input-group mb-3">
+												<div class="input-group-prepend">
+													<div class="input-group-text">
+														B
+													</div>
+												</div>
+												<input type="number" class="form-control" v-model="data.safe[1]" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 一键下滑 -->
+					<div :id="panels[2].id" class="container tab-pane fade">
+						<h2 v-text="panels[2].title"></h2>
+						<br />
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="checkbox" v-model="data.isSlipRun" />
+								</div>
+							</div>
+							<p type="text" class="form-control">启用</p>
+						</div>
+					</div>
+
+					<!-- 下落上翻 -->
+					<div :id="panels[3].id" class="container tab-pane fade">
+						<h2 v-text="panels[3].title"></h2>
+						<br />
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="checkbox" v-model="data.isSlipThenUpRun" />
+								</div>
+							</div>
+							<p type="text" class="form-control">启用</p>
+						</div>
+					</div>
+
+					<!-- 小跳 -->
+					<div :id="panels[4].id" class="container tab-pane fade">
+						<h2 v-text="panels[4].title"></h2>
+						<br />
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="checkbox" v-model="data.isLittleJumpRun" />
+								</div>
+							</div>
+							<p type="text" class="form-control">启用</p>
+						</div>
+					</div>
+
+					<!-- 绳子上下翻 -->
+					<div :id="panels[5].id" class="container tab-pane fade">
+						<h2 v-text="panels[5].title"></h2>
+						<br />
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<input type="checkbox" v-model="data.isSlipAndUpCtnRun" />
+								</div>
+							</div>
+							<p type="text" class="form-control">启用</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="./js/setting.js"></script>
+</html>

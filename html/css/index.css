@@ -1,0 +1,134 @@
+@font-face {
+	font-family: title-font;
+	src: url("./Product-Sans-Regular.ttf");
+}
+
+body {
+	padding: 0;
+	-webkit-app-region: drag;
+}
+.title-container {
+	text-align: center;
+	padding-top: 40px;
+	margin-bottom: -8px;
+}
+.title {
+	font-size: 80px;
+	font-family: title-font;
+}
+#icon {
+	position: absolute;
+	left: 7px;
+	top: 8px;
+	width: 25px;
+	height: 25px;
+
+	background-image: url("./v.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+#frame {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 0;
+}
+svg {
+	width: 11px;
+	height: 11px;
+}
+#minimizeBtn {
+	display: inline-block;
+	padding: 9px;
+	transition: 0.22s;
+	/* background-color: rgba(255, 255, 255, 0.103); */
+
+	position: relative;
+	top: -0.009px;
+
+	-webkit-app-region: no-drag;
+}
+#minimizeBtn:hover {
+	background-color: rgba(255, 255, 255, 0.103);
+}
+#exitBtn {
+	display: inline-block;
+	padding: 9px;
+	transition: 0.22s;
+	/* background-color: rgb(255, 52, 52); */
+
+	-webkit-app-region: no-drag;
+}
+#exitBtn:hover {
+	background-color: rgb(255, 52, 52);
+}
+#runBtn {
+	/* 居中效果 */
+	position: relative;
+	margin: 28px auto 0;
+
+	width: 77%;
+	padding: 0;
+	font-size: 18px;
+	line-height: 50px;
+
+	color: white;
+	background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+	background-size: 400%;
+	border: none;
+	border-radius: 100px;
+
+	z-index: 1;
+
+	cursor: pointer;
+	transition: 0.05s ease-in-out;
+	-webkit-app-region: no-drag;
+}
+
+#runBtn::before {
+	content: "";
+	position: absolute;
+	left: -5px;
+	right: -5px;
+	top: -5px;
+	bottom: -5px;
+	background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+	background-size: 400%;
+	border-radius: 100px;
+	filter: blur(20px);
+	z-index: -1;
+}
+#runBtn:active {
+	transform: scale(0.97);
+}
+.flow-sun::before {
+	animation: sun 8s infinite;
+}
+.flow-sun {
+	animation: sun 8s infinite;
+}
+@keyframes sun {
+	100% {
+		background-position: -400%;
+	}
+}
+
+#settingBtn {
+	position: absolute;
+	left: -4px;
+	bottom: 1px;
+	border-style: none;
+
+	transform: 1s;
+
+	-webkit-app-region: no-drag;
+}
+#settingBtn:active {
+	transform: scale(0.95);
+}
+
+#author {
+	position: absolute;
+	right: 12px;
+	bottom: 6px;
+}

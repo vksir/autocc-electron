@@ -1,0 +1,14 @@
+__pycache__/
+.vscode/
+.idea
+AutoCC-win32-x64/
+build/
+dist/
+node_modules/
+res/
+
+CC.dll
+slip_etc.dll
+data.json
+config.json
+AutoCC-win32-x64.rar

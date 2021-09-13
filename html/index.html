@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<title>AutoCC</title>
+		<link rel="stylesheet" href="./css/bootstrap-4.4.1.min.css" />
+		<script>
+			window.$ = window.jQuery = require("./js/jquery-3.4.1.min");
+		</script>
+		<script src="./js/popper.min.js"></script>
+		<script src="./js/bootstrap-4.4.1.min.js"></script>
+		<link rel="stylesheet" href="./css/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+	</head>
+	<body class="bg-light text-center">
+		<div id="icon"></div>
+		<div id="frame">
+			<div id="minimizeBtn">
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+					<line x1="0" y1="5.5" x2="11" y2="5.5" style="stroke: rgb(192, 192, 192); stroke-width: 1.25;" />
+				</svg>
+			</div>
+			<div id="exitBtn">
+				<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+					<line x1="0" y1="0" x2="11" y2="11" style="stroke: rgb(192, 192, 192); stroke-width: 1.25;" />
+					<line x1="11" y1="0" x2="0" y2="11" style="stroke: rgb(192, 192, 192); stroke-width: 1.25;" />
+				</svg>
+			</div>
+		</div>
+		<div class="bg-dark">
+			<div class="title-container">
+				<span style="color: rgb(51, 204, 255);" class="title">Auto</span>
+				<span style="color: rgb(204, 102, 255);" class="title">C</span>
+				<span style="color: rgb(177, 177, 177);" class="title">C</span>
+			</div>
+			<p class="text-light text-right small" style="padding: 0 15px 10px;">
+				——Made for 忍者必须死
+			</p>
+		</div>
+		<div class="text-center">
+			<!-- <button id="runBtn" type="button" class="btn btn-primary btn-lg" onclick="changeRun()">
+				START
+			</button> -->
+			<div id="runBtn" class="" onclick="changeRun()">
+				START
+			</div>
+			<button id="settingBtn" type="button" class="btn btn-outline-light text-dark">
+				<i class="fa fa-gear fa-lg"></i>
+			</button>
+			<div id="author" class="text-right">
+				<small class="text-secondary">By 花舞丶千痕 </small>
+			</div>
+		</div>
+		<script src="./js/index.js"></script>
+	</body>
+</html>
